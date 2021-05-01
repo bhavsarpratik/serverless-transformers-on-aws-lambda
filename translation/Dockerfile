@@ -23,9 +23,9 @@ COPY ./ ./
 # Run test cases and this saves the transformer model in the container
 # RUN pip install pytest --no-cache-dir && pytest tests -s -vv
 
-RUN chmod -R 0755 /cache/easynmt
-RUN chmod -R 0755 /cache/easynmt/opus-mt_part
-RUN chmod -R 0755 /cache/transformers
-RUN chmod -R 0755 /cache/torch
+RUN chmod -R 0777 /cache/easynmt
+RUN chmod -R 0777 /cache/easynmt/opus-mt_part
+RUN chmod -R 0777 /cache/transformers
+RUN chmod -R 0777 /cache/torch
 
 CMD [ "lambda/main.lambda_handler"]
