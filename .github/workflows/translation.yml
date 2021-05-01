@@ -1,0 +1,23 @@
+name: Translation
+
+on:
+  pull_request: 
+    branches:
+      - main
+    paths:
+      - "translation/**"
+
+jobs:
+  translation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./translation
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+    - name: Build container
+      run: |
+        docker build --tag translation:latest .
