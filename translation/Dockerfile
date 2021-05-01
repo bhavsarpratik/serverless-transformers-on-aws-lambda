@@ -1,15 +1,15 @@
 FROM amazon/aws-lambda-python
 
-RUN mkdir /tmp/cache
-RUN mkdir /tmp/cache/easynmt
-RUN mkdir /tmp/cache/easynmt/opus-mt_part
-RUN mkdir /tmp/cache/transformers
-RUN mkdir /tmp/cache/torch
+RUN mkdir /cache
+RUN mkdir /cache/easynmt
+RUN mkdir /cache/easynmt/opus-mt_part
+RUN mkdir /cache/transformers
+RUN mkdir /cache/torch
 
-ENV EASYNMT_CACHE=/tmp/cache/easynmt
-ENV TRANSFORMERS_CACHE=/tmp/cache/transformers
+ENV EASYNMT_CACHE=/cache/easynmt
+ENV TRANSFORMERS_CACHE=/cache/transformers
 ENV TRANSFORMERS_VERBOSITY=error
-ENV TORCH_CACHE=/tmp/cache/torch
+ENV TORCH_CACHE=/cache/torch
 ENV NLTK_DATA=/tmp
 
 RUN yum -y install gcc-c++
@@ -24,9 +24,9 @@ COPY ./ ./
 # Run test cases and this saves the transformer model in the container
 # RUN pip install pytest --no-cache-dir && pytest tests -s -vv
 
-# RUN chmod -R 0777 /cache/easynmt
-# RUN chmod -R 0777 /cache/easynmt/opus-mt_part
-# RUN chmod -R 0777 /cache/transformers
-# RUN chmod -R 0777 /cache/torch
+RUN chmod -R 0777 /cache/easynmt
+RUN chmod -R 0777 /cache/easynmt/opus-mt_part
+RUN chmod -R 0777 /cache/transformers
+RUN chmod -R 0777 /cache/torch
 
 CMD [ "lambda/main.lambda_handler"]
