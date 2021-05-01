@@ -11,7 +11,8 @@ requests = {
         "text": "I will never download your app will steal your bank information and authorizes a subscription you never request",
     },
 ],
-    "target_lang": "en"
+    "target_lang": "en",
+    "source_lang": "ROMANCE"
 }
 
 expected_response = {

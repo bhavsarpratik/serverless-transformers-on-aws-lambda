@@ -38,11 +38,7 @@ def translate_records(target_lang: str, records: List[dict], source_lang: Option
 
     texts = [record["text"] for record in records]
 
-    if source_lang is None:
-        detected_langs = model.language_detection(texts)
-        output['detected_langs'] = detected_langs
-    else:
-        detected_langs = [source_lang]*len(texts)
+    detected_langs = model.language_detection(texts)
     
     translations = model.translate(texts, target_lang=target_lang, source_lang=source_lang, beam_size=beam_size, perform_sentence_splitting=perform_sentence_splitting, batch_size=int(os.getenv('EASYNMT_BATCH_SIZE', 16)))
     for translation, detected_lang, record in zip(translations, detected_langs, records):
