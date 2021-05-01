@@ -2,6 +2,7 @@ FROM amazon/aws-lambda-python
 
 RUN mkdir /cache
 RUN mkdir /cache/easynmt
+RUN mkdir /cache/easynmt/opus-mt_part
 RUN mkdir /cache/transformers
 RUN mkdir /cache/torch
 
@@ -23,6 +24,7 @@ COPY ./ ./
 # RUN pip install pytest --no-cache-dir && pytest tests -s -vv
 
 RUN chmod -R 0755 /cache/easynmt
+RUN chmod -R 0755 /cache/easynmt/opus-mt_part
 RUN chmod -R 0755 /cache/transformers
 RUN chmod -R 0755 /cache/torch
 
