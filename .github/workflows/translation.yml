@@ -33,7 +33,7 @@ jobs:
       with:
         access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: us-east-2
+        region: us-east-1
         image: translation:latest
     - name: Update lambda with image
       run: aws lambda update-function-code --function-name  translation --image-uri 968911158010.dkr.ecr.us-east-1.amazonaws.com/translation:latest
