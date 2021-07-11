@@ -3,7 +3,7 @@ name: classification
 on:
   pull_request: 
     branches:
-      - main
+      - master # this can be main
     paths:
       - "classification/**"
 
