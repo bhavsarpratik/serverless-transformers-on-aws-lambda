@@ -16,7 +16,7 @@ class Classifier:
         _ = self.get_sentiment_pipeline(model_name=config.DEFAULT_MODEL_NAME, tokenizer_name=config.DEFAULT_TOKENIZER_NAME) #warm up
 
     @staticmethod
-    @lru_cache(maxsize=4)
+    @lru_cache(maxsize=config.CACHE_MAXSIZE)
     def get_sentiment_pipeline(model_name: str, tokenizer_name: str) -> pipeline:
         """Sentiment pipeline for the given model and tokenizer
 
@@ -38,10 +38,10 @@ class Classifier:
             model_name, config=model_config
         )
         tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
-        sentiment_pipeline = pipeline(
+        classification_pipeline = pipeline(
             "sentiment-analysis", model=model, tokenizer=tokenizer
         )
-        return sentiment_pipeline
+        return classification_pipeline
 
     def get_clean_text(self, text: str) -> str:
         """Clean the text
@@ -68,9 +68,9 @@ class Classifier:
         tokenizer_name = request["tokenizer_name"]
         
         logger.info(f"Predicting sentiment for {len(texts)} texts")
-        pipeline = self.get_sentiment_pipeline(model_name, tokenizer_name)
+        classification_pipeline = self.get_sentiment_pipeline(model_name, tokenizer_name)
 
-        predictions = pipeline(texts)
+        predictions = classification_pipeline(texts)
         for i, pred in enumerate(predictions):
             predictions[i]["score"] = round(pred["score"], 2)
 

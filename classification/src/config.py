@@ -15,3 +15,6 @@ ID_SENTIMENT_MAPPING = { # add for all models to be supported
         3: "SADNESS"
     }
 }
+
+# cache
+CACHE_MAXSIZE = 4
