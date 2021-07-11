@@ -1,7 +1,10 @@
 import json
 import os
 import time
+import warnings
 from typing import List, Optional
+
+warnings.filterwarnings("ignore")
 
 from easynmt import EasyNMT
 
