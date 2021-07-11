@@ -14,18 +14,14 @@ def requests():
 @pytest.fixture
 def response():
     return {
-        'predictions': [
-            [{
-                'label': 'POSITIVE',
-                'score': 0.9664698243141174
-            }],
-            [{
-                'label': 'NEGATIVE',
-                'score': 0.9518184661865234
-            }],
-            [{
-                'label': 'NEUTRAL',
-                'score': 0.6933464407920837
-            }]
-        ]
+        'predictions': [{
+            'label': 'POSITIVE',
+            'score': 0.97
+        }, {
+            'label': 'NEGATIVE',
+            'score': 0.95
+        }, {
+            'label': 'NEUTRAL',
+            'score': 0.69
+        }]
     }

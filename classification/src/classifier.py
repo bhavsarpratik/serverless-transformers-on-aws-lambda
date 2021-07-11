@@ -63,14 +63,17 @@ class Classifier:
         Returns:
             dict: classes of the given text
         """
-        texts = request["texts"]
+        texts = [self.get_clean_text(text) for text in request["texts"]]
         model_name = request["model_name"]
         tokenizer_name = request["tokenizer_name"]
         
         logger.info(f"Predicting sentiment for {len(texts)} texts")
         pipeline = self.get_sentiment_pipeline(model_name, tokenizer_name)
-        predictions = [pipeline(self.get_clean_text(text)) for text in tqdm(texts)]
-        
+
+        predictions = pipeline(texts)
+        for i, pred in enumerate(predictions):
+            predictions[i]["score"] = round(pred["score"], 2)
+
         return {
             "predictions": predictions
         }
