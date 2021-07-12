@@ -1,6 +1,8 @@
 # End2End Serverless Transformers On AWS Lambda for NLP 🚀
 
-Deploy transformers serverless on AWS Lambda with ease 💆‍♂️
+## Deploy transformers with ease 💆‍♂️
+
+Go through this [deck](https://bit.ly/serverless-transformers) for full info
 
 Current available pipelines
 1. classification
