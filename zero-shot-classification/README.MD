@@ -5,11 +5,11 @@ Zero-Shot using Transformers on AWS Lambda. Check root readme for complete setup
 ```
 {
         "texts": ["food was great", "food was bad", "i am going out for food"],
-        "labels": ["negative", "postive", "neutral"],
-        "hypothesis": "The sentiment of the review is {}.",
-        "model_name": "typeform/mobilebert-uncased-mnli",
-        "tokenizer_name": "typeform/mobilebert-uncased-mnli",
-        "multi_label": False
+        "labels": ["negative", "postive", "neutral"], # optional
+        "hypothesis": "The sentiment of the review is {}.", # optional
+        "model_name": "typeform/mobilebert-uncased-mnli", # optional
+        "tokenizer_name": "typeform/mobilebert-uncased-mnli", # optional
+        "multi_label": False # optional
     }
 ```
 

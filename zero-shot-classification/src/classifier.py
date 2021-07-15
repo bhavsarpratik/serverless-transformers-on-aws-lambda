@@ -3,7 +3,6 @@ from functools import lru_cache
 
 warnings.filterwarnings("ignore")
 
-from tqdm import tqdm
 from transformers import pipeline
 
 from src import config, utils
@@ -51,15 +50,11 @@ class Classifier:
             dict: classes of the given text
         """
         texts = [self.get_clean_text(text) for text in request["texts"]]
-
+        
         labels = request.get("labels", config.DEFAULT_CANDIDATE_LABELS)
-            
         hypothesis = request.get("hypothesis", config.DEFAULT_HYPOTHESIS_TEMPLATE)
-
         model_name = request.get("model_name", config.DEFAULT_MODEL_NAME)
-        
         tokenizer_name = request.get("tokenizer_name", config.DEFAULT_TOKENIZER_NAME)
-        
         multi_label = request.get("multi_label", config.DEFAULT_MULTI_LABEL)
         
         logger.info(f"Classifying {len(texts)} texts")
@@ -76,7 +71,7 @@ class Classifier:
             
         else:
             output = []
-            for i, pred in enumerate(predictions):
+            for pred in predictions:
                 output.append({"label": pred["labels"], "score": [round(score, 2) for score in pred["scores"]]})
                 
             return {"predictions": output}
