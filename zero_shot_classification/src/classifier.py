@@ -51,22 +51,32 @@ class Classifier:
             dict: classes of the given text
         """
         texts = [self.get_clean_text(text) for text in request["texts"]]
-        labels = request["labels"]
-        hypothesis = request["hypothesis"]
 
-        model_name = request["model_name"]
-        tokenizer_name = request["tokenizer_name"]
+        labels = request["labels"] if "labels" in request.keys() else config.DEFAULT_CANDIDATE_LABELS
+            
+        hypothesis = request["hypothesis"] if "hypothesis" in request.keys() else config.DEFAULT_HYPOTHESIS_TEMPLATE
+
+        model_name = request["model_name"] if "model_name" in request.keys() else config.DEFAULT_MODEL_NAME
+        
+        tokenizer_name = request["tokenizer_name"] if "tokenizer_name" in request.keys() else config.DEFAULT_TOKENIZER_NAME
+        
+        multi_label = request["multi_label"] if "multi_label" in request.keys() else config.DEFAULT_MULTI_LABEL
         
         logger.info(f"Classifying {len(texts)} texts")
         classification_pipeline = self.get_zero_shot_classification_pipeline(model_name, tokenizer_name)
 
-        predictions = classification_pipeline(texts, labels, hypothesis)
-
-        output = []
-        for i, pred in enumerate(predictions):
-            output.append({"label": pred["labels"][0], "score": round(pred["scores"][0], 2)})
-
-        return {
-            "predictions": output
-        }
+        predictions = classification_pipeline(texts, labels, hypothesis, multi_label=multi_label)
+        
+        if not multi_label:
+            output = []
+            for i, pred in enumerate(predictions):
+                output.append({"label": pred["labels"][0], "score": round(pred["scores"][0], 2)})
     
+            return {"predictions": output}
+            
+        else:
+            output = []
+            for i, pred in enumerate(predictions):
+                output.append({"label": pred["labels"], "score": [round(score, 2) for score in pred["scores"]]})
+                
+            return {"predictions": output}
