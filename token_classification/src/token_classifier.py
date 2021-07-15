@@ -1,19 +1,20 @@
+from src import config, utils
+from transformers import (AutoConfig, AutoModelForTokenClassification,
+                          AutoTokenizer, pipeline)
+from tqdm import tqdm
 import warnings
 from functools import lru_cache
 
 warnings.filterwarnings("ignore")
 
-from tqdm import tqdm
-from transformers import (AutoConfig, AutoModelForTokenClassification,
-                          AutoTokenizer, pipeline)
-
-from src import config, utils
 
 logger = utils.create_logger(project_name=config.PREDICTION_TYPE, level="INFO")
 
+
 class TokenClassifier:
     def __init__(self):
-        _ = self.get_ner_pipeline(model_name=config.DEFAULT_MODEL_NAME, tokenizer_name=config.DEFAULT_TOKENIZER_NAME) #warm up
+        _ = self.get_ner_pipeline(model_name=config.DEFAULT_MODEL_NAME,
+                                  tokenizer_name=config.DEFAULT_TOKENIZER_NAME)  # warm up
 
     @staticmethod
     @lru_cache(maxsize=config.CACHE_MAXSIZE)
@@ -51,29 +52,32 @@ class TokenClassifier:
 
         Returns:
             str: clean text
-        """        
-        return text.strip().lower()
+        """
+        return text.strip()
 
-    def __call__(self, request: dict)-> dict:
+    def __call__(self, request: dict) -> dict:
         """Predict tags of the given tokens
-        
+
         Args:
             request (dict): request containing the list of text to predict entities
-        
+
         Returns:
             dict: classes of the given text
         """
         texts = [self.get_clean_text(text) for text in request["texts"]]
         model_name = request["model_name"]
         tokenizer_name = request["tokenizer_name"]
-        
+
         logger.info(f"Predicting tags for {len(texts)} texts")
         ner_pipeline = self.get_ner_pipeline(model_name, tokenizer_name)
 
         predictions = ner_pipeline(texts)
+        
+        for i, pred in enumerate(predictions):
+            for dct in pred:
+                dct["score"] = round(dct["score"], 2)
+            predictions[i] = pred
 
         return {
             "predictions": predictions
         }
-
-    
