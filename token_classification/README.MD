@@ -1,27 +1,41 @@
-## Classification service   
-Classification using Transformers on AWS Lambda. Check root readme for complete setup info.
+## Token Classification service
+
+Token Classification using Transformers on AWS Lambda. Check root readme for complete setup info.
 
 ## Request format
+
 ```
 {
-        "texts": ["food was great", "food was bad", "i am going out for food"],
-        "model_name": "cardiffnlp/twitter-roberta-base-sentiment",
-        "tokenizer_name": "roberta-base"
+        "texts": ["Mark is going back to Germany from South Africa"],
+        "model_name": "dslim/bert-base-NER",
+        "tokenizer_name": "dslim/bert-base-NER"
     }
 ```
 
 ## Response format
+
 ```
 {
         'predictions': [{
-            'label': 'POSITIVE',
-            'score': 0.97
-        }, {
-            'label': 'NEGATIVE',
-            'score': 0.95
-        }, {
-            'label': 'NEUTRAL',
-            'score': 0.69
+            "entity_group": "PER",
+            "score": 0.9996247887611389,
+            "word": "Mark",
+            "start": 0,
+            "end": 4
+        },
+            {
+            "entity_group": "LOC",
+            "score": 0.9998000264167786,
+            "word": "Germany",
+            "start": 22,
+            "end": 29
+        },
+            {
+            "entity_group": "LOC",
+            "score": 0.9994221925735474,
+            "word": "South Africa",
+            "start": 35,
+            "end": 47
         }]
     }
 ```
