@@ -1,7 +1,7 @@
 from sklearn import pipeline
-from src.classifier import Classifier
+from src.token_classifier import TokenClassifier
 
-pipeline = Classifier()
+pipeline = TokenClassifier()
 
 
 def lambda_handler(event, context):

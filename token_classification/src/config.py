@@ -13,9 +13,7 @@ ID_TAG_MAPPING = { # add for all models to be supported
         6: "I-ORG",
         7: "B-LOC",
         8: "I-LOC"
-    },
-    
+    },   
 }
-
 # cache
 CACHE_MAXSIZE = 4
