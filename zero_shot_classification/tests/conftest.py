@@ -16,8 +16,8 @@ def requests():
 @pytest.fixture
 def response():
     return {'predictions':[
-        {'label': 'postive', 'score': 0.81},
+        {'label': 'postive', 'score': 0.8},
         {'label': 'negative', 'score': 0.87},
-        {'label': 'postive', 'score': 0.59}
+        {'label': 'postive', 'score': 0.58}
         ]
         }
