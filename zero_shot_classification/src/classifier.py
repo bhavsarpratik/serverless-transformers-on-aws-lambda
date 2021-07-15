@@ -52,15 +52,15 @@ class Classifier:
         """
         texts = [self.get_clean_text(text) for text in request["texts"]]
 
-        labels = request["labels"] if "labels" in request.keys() else config.DEFAULT_CANDIDATE_LABELS
+        labels = request.get("labels", config.DEFAULT_CANDIDATE_LABELS)
             
-        hypothesis = request["hypothesis"] if "hypothesis" in request.keys() else config.DEFAULT_HYPOTHESIS_TEMPLATE
+        hypothesis = request.get("hypothesis", config.DEFAULT_HYPOTHESIS_TEMPLATE)
 
-        model_name = request["model_name"] if "model_name" in request.keys() else config.DEFAULT_MODEL_NAME
+        model_name = request.get("model_name", config.DEFAULT_MODEL_NAME)
         
-        tokenizer_name = request["tokenizer_name"] if "tokenizer_name" in request.keys() else config.DEFAULT_TOKENIZER_NAME
+        tokenizer_name = request.get("tokenizer_name", config.DEFAULT_TOKENIZER_NAME)
         
-        multi_label = request["multi_label"] if "multi_label" in request.keys() else config.DEFAULT_MULTI_LABEL
+        multi_label = request.get("multi_label", config.DEFAULT_MULTI_LABEL)
         
         logger.info(f"Classifying {len(texts)} texts")
         classification_pipeline = self.get_zero_shot_classification_pipeline(model_name, tokenizer_name)
