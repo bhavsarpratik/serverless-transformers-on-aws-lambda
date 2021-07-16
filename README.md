@@ -7,14 +7,14 @@
 
 ## Deploy transformers with ease 💆‍♂️
 
-Go through this [deck](https://bit.ly/serverless-transformers) for full info
+Go through this [slide deck](https://bit.ly/serverless-transformers) for full info
 
 Current available pipelines
 1. classification
-1. translation (coming soon)
-1. token classification (need contribution)
-1. text generation (need contribution)
-1. zero shot classification (need contribution)
+1. translation **(coming soon)**
+1. token classification 
+1. text generation **(need contribution)**
+1. zero shot classification
 
 ## What you get with this?
 - ability to run transformers without servers

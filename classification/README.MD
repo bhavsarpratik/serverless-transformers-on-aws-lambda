@@ -5,8 +5,8 @@ Classification using Transformers on AWS Lambda. Check root readme for complete 
 ```
 {
         "texts": ["food was great", "food was bad", "i am going out for food"],
-        "model_name": "cardiffnlp/twitter-roberta-base-sentiment",
-        "tokenizer_name": "roberta-base"
+        "model_name": "cardiffnlp/twitter-roberta-base-sentiment",  # optional
+        "tokenizer_name": "roberta-base"  # optional
     }
 ```
 
