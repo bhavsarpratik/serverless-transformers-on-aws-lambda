@@ -10,6 +10,12 @@ def requests():
         "tokenizer_name": config.DEFAULT_TOKENIZER_NAME
     }
 
+@pytest.fixture
+def requests_default():
+    return {
+        "texts": ["Mark is going back to Germany from South Africa", "John Adams is performing live in Venezuela"],
+    }
+
 
 @pytest.fixture
 def response():
