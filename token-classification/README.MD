@@ -7,8 +7,8 @@ Token Classification using Transformers on AWS Lambda. Check root readme for com
 ```
 {
     "texts": ["Mark is going back to Germany from South Africa", "John Adams is performing live in Venezuela"],
-    "model_name": "dslim/bert-base-NER", # if not passed defaults to dslim/bert-base-NER
-    "tokenizer_name": "dslim/bert-base-NER"
+    "model_name": "dslim/bert-base-NER", # optional
+    "tokenizer_name": "dslim/bert-base-NER" # optional
 }
 ```
 
