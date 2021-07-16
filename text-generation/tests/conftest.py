@@ -18,8 +18,8 @@ def requests():
 @pytest.fixture
 def response():
     return {
-        'predictions': [
-            [{'generated_text': 'India is a great help in terms of the security of our species. The'}], 
-            [{'generated_text': "AI will rule this week, though we won't know until the end of"}]
+        'predictions':  [
+            [{'generated_text': 'India is a great country for international investors. It also has the support of'}],
+            [{'generated_text': 'AI will rule out that she cannot be allowed to wear a hijab but will'}]
         ]
     }

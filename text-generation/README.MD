@@ -1,4 +1,4 @@
-## Token Classification service
+## Text Generation service
 
 Text Generation using Transformers on AWS Lambda. Check root readme for complete setup info.
 
@@ -7,10 +7,10 @@ Text Generation using Transformers on AWS Lambda. Check root readme for complete
 ```
 {
     "texts": ["India is", "AI will"],
-    "model_name": "distilgpt2",  # optional
-    "tokenizer_name": "distilgpt2",  # optional
-    "max_len": 10, # maximum no. of token(words) to be genrated using the given context optional
-    "num_return_sequences": 1 # no. of sequences(sentences) to be genrated using the given context optional
+    "model_name": "distilgpt2",  (optional argument)
+    "tokenizer_name": "distilgpt2",  (optional argument)
+    "max_len": 10, # maximum no. of token(words) to be genrated using the given context (optional argument)
+    "num_return_sequences": 1 # no. of sequences(sentences) to be genrated using the given context (optional argument)
 }
 ```
 
@@ -19,8 +19,8 @@ Text Generation using Transformers on AWS Lambda. Check root readme for complete
 ```
 {
 'predictions': [
-                [{'generated_text': 'India is a great help in terms of the security of our species. The'}], 
-                [{'generated_text': "AI will rule this week, though we won't know until the end of"}]
+                [{'generated_text': 'India is a great country for international investors. It also has the support of'}],
+                [{'generated_text': 'AI will rule out that she cannot be allowed to wear a hijab but will'}]
             ]
 }
 ```

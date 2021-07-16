@@ -33,6 +33,10 @@ class TextGenerator:
             model_name, config=model_config
         )
         tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+
+        # for reproducibility of result
+        set_seed(10)
+
         text_generator = pipeline(
             "text-generation", model=model, tokenizer=tokenizer
         )
@@ -65,7 +69,6 @@ class TextGenerator:
         
         logger.info(f"Generating text for {len(texts)} sentences")
 
-        set_seed(7)
         text_generator = self.get_text_generator(model_name, tokenizer_name)
 
         max_len = request.get("max_len", config.DEFAULT_MAX_LEN)
