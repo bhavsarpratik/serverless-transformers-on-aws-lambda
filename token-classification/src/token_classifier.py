@@ -1,11 +1,11 @@
+import warnings
+warnings.filterwarnings("ignore")
+
 from src import config, utils
 from transformers import (AutoConfig, AutoModelForTokenClassification,
                           AutoTokenizer, pipeline)
 from tqdm import tqdm
-import warnings
 from functools import lru_cache
-
-warnings.filterwarnings("ignore")
 
 
 logger = utils.create_logger(project_name=config.PREDICTION_TYPE, level="INFO")
