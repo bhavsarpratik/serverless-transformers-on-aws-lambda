@@ -1,6 +1,7 @@
 from src.sentence_encoder import SentenceEncoder
+import numpy as np
 
 pipeline = SentenceEncoder()
 
 def test_response(requests, response):
-    assert response['predictions'] - pipeline(requests)['predictions'][0][0] < 0.001
+    assert np.allclose(response['predictions'], pipeline(requests)['predictions'], atol=1e-3)

@@ -5,6 +5,7 @@ from functools import lru_cache
 
 from sentence_transformers import SentenceTransformer
 
+
 from src import config, utils
 
 logger = utils.create_logger(project_name=config.PREDICTION_TYPE, level="INFO")
@@ -37,7 +38,7 @@ class SentenceEncoder:
         Returns:
             str: clean text
         """        
-        return text.strip()
+        return text.strip().lower()
 
     def __call__(self, request: dict)-> dict:
         """ embeddings of the given list of sentences
