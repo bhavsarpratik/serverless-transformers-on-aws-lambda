@@ -1,12 +1,13 @@
 import warnings
+
 warnings.filterwarnings("ignore")
 
-from src import config, utils
-from transformers import (AutoConfig, AutoModelForTokenClassification,
-                          AutoTokenizer, pipeline)
-from tqdm import tqdm
 from functools import lru_cache
 
+from transformers import (AutoConfig, AutoModelForTokenClassification,
+                          AutoTokenizer, pipeline)
+
+from src import config, utils
 
 logger = utils.create_logger(project_name=config.PREDICTION_TYPE, level="INFO")
 
@@ -65,8 +66,8 @@ class TokenClassifier:
             dict: classes of the given text
         """
         texts = [self.get_clean_text(text) for text in request["texts"]]
-        model_name = request["model_name"]
-        tokenizer_name = request["tokenizer_name"]
+        model_name = request.get("model_name", config.DEFAULT_MODEL_NAME)
+        tokenizer_name = request.get("tokenizer_name", config.DEFAULT_TOKENIZER_NAME)
 
         logger.info(f"Predicting tags for {len(texts)} texts")
         ner_pipeline = self.get_ner_pipeline(model_name, tokenizer_name)
