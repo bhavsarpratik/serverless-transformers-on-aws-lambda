@@ -34,6 +34,8 @@ class TextGenerator:
             model_name, config=model_config
         )
         tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+        
+        set_seed(10) # for reproducibility of result
 
         text_generator = pipeline(
             "text-generation", model=model, tokenizer=tokenizer
