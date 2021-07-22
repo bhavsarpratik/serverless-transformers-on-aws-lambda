@@ -16,10 +16,9 @@ Sentence Encoding using Sentence Transformers on AWS Lambda. Check root readme f
 ## Response format
 
 ```
-# returns a np.ndarray of the shape (348,) for each sentence
-# below example shows string version of the output
+# returns a list of the shape (348,) for each sentence
 
 {
-"predictions": [[-1.76214233e-01  1.20601095e-01 -2.93623984e-01 -2.29858086e-01 ... -0.3186724   0.41656044 -0.05431654  0.14036156  1.0559164   0.53018135]]
+"vectors": [[-1.76214233e-01  1.20601095e-01 -2.93623984e-01 -2.29858086e-01 ... -0.3186724   0.41656044 -0.05431654  0.14036156  1.0559164   0.53018135]]
 }
 ```

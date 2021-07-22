@@ -1,10 +1,10 @@
 import warnings
+
 warnings.filterwarnings("ignore")
 
 from functools import lru_cache
 
 from sentence_transformers import SentenceTransformer
-
 
 from src import config, utils
 
@@ -60,7 +60,7 @@ class SentenceEncoder:
         embeddings = sentence_encoder.encode(texts)
         
         return {
-            "predictions": embeddings
+            "vectors": embeddings
         }
 
     
