@@ -1,0 +1,39 @@
+name: sentence-encoding
+
+on:
+  pull_request: 
+    branches:
+      - master # this can be main
+    paths:
+      - "sentence-encoding/**"
+
+jobs:
+  sentence-encoding:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./sentence-encoding
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+    - name: Build container
+      run: |
+        docker build --tag sentence-encoding:latest .
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - name: Push2ECR
+      id: ecr
+      uses: jwalton/gh-ecr-push@v1
+      with:
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: us-east-1
+        image: sentence-encoding:latest
+    - name: Update lambda with image
+      run: aws lambda update-function-code --function-name  sentence-encoding --image-uri 968911158010.dkr.ecr.us-east-1.amazonaws.com/sentence-encoding:latest
