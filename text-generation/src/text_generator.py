@@ -8,6 +8,7 @@ from transformers import (AutoConfig, AutoModelForCausalLM,
 
 from src import config, utils
 
+set_seed(10) 
 logger = utils.create_logger(project_name=config.PREDICTION_TYPE, level="INFO")
 
 class TextGenerator:
@@ -33,9 +34,6 @@ class TextGenerator:
             model_name, config=model_config
         )
         tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
-
-        # for reproducibility of result
-        set_seed(10)
 
         text_generator = pipeline(
             "text-generation", model=model, tokenizer=tokenizer
