@@ -7,7 +7,7 @@
 
 ## Deploy transformers with ease 💆‍♂️
 
-Go through this [slide deck](https://bit.ly/serverless-transformers) for full info
+Go through this [video](https://www.youtube.com/watch?v=EoazSUJyGbs) and [slide deck](https://bit.ly/serverless-transformers) for full info.
 
 Current available pipelines
 1. classification
